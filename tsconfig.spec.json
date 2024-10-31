@@ -1,0 +1,17 @@
+{
+  "extends": "./tsconfig.node.json",
+  "compilerOptions": {
+    "outDir": "./dist",
+    "types": ["jest", "node"],
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "jsx": "react-jsx",
+    "lib": ["dom", "esnext"] // Добавьте 'dom' здесь
+  },
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/**/*.spec.ts"
+  ],
+  "exclude": ["node_modules"]
+}
