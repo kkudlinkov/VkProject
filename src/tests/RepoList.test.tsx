@@ -50,7 +50,8 @@ describe("RepoList", () => {
         ];
         render(<RepoList />);
         console.log("Before delete:", repoStore.repositories);
-        fireEvent.click(screen.getByText("Удалить"));
+        const deleteButtons = screen.getAllByText("Удалить");
+        fireEvent.click(deleteButtons[0]); // Нажимает на первую кнопку "Удалить"
         console.log("After delete:", repoStore.repositories);
         expect(repoStore.repositories).toHaveLength(0); // Проверка, что репозиторий был удален
     });
@@ -62,9 +63,11 @@ describe("RepoList", () => {
 
         render(<RepoList />);
 
-        fireEvent.click(screen.getByText("Редактировать"));
+        const editButtons = screen.getAllByText("Редактировать");
+        fireEvent.click(editButtons[0]); // Нажимает на первую кнопку "Редактировать"
 
-        expect(screen.getByText("Редактировать")).toBeInTheDocument();
+        // Проверяем, что модальное окно открыто
+        expect(screen.getByRole('heading', { name: /редактировать репозиторий/i })).toBeInTheDocument();
     });
 
     test("sorts repositories by name", () => {
@@ -91,7 +94,8 @@ describe("RepoList", () => {
         render(<RepoList />);
 
         // Открываем модальное окно
-        fireEvent.click(screen.getByRole('button', { name: /редактировать/i }));
+        const editButtons = screen.getAllByText("Редактировать");
+        fireEvent.click(editButtons[0]); // Нажимает на первую кнопку "Редактировать"
 
         // Проверяем, что модальное окно открыто
         expect(screen.getByRole('heading', { name: /редактировать репозиторий/i })).toBeInTheDocument();
