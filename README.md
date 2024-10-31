@@ -8,12 +8,16 @@
 4. Jest, React Testing Library - Для тестирования нашего приложения
 5. TailWind - Инструмент для дизайна, очень прост в освоении и позволяет сэкономить много времени для настройки стилей
 
-### 2. Для реализации проекта использовалось следующее API: 
-https://api.github.com/search/repositories?q=javascript&sort=stars&order=asc&page=1
+### 2. Для реализации проекта использовалось следующее API: https://api.github.com/search/repositories?q=javascript&sort=stars&order=asc&page=1
 
 Так как он хорошо поддерживают пагинацию данных и имеет достаточно данных, чтобы отобразить в чем преимущество последовательной загрузки данных из API.
 
-### 3.
+### 3. Для вашего удобства, сайт был развернуть на бесплатном хостинге netlify по URL: https://kkudlinkov-vkproject.netlify.app/ 
+
+### 4. Также была написана мобильная адаптация для это версии сайта:
+
+![alt text](https://i.postimg.cc/wjmTyHFK/image.png)
+
 
 ## Установка и запуск в режиме разработки
 

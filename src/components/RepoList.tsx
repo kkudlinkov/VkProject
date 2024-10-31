@@ -103,7 +103,7 @@ const RepoList = observer(() => {
                     Сбросить сортировку
                 </button>
                 <div onScroll={handleScroll} style={{height: '70vh', overflowY: 'auto'}}>
-                    <table className="min-w-full border-collapse border border-gray-300">
+                    <table className="min-w-full border-collapse border border-gray-300 hidden md:table">
                         <thead className="sticky top-0 bg-gray-200">
                         <tr>
                             <th onClick={() => handleSort('id')}
@@ -125,28 +125,19 @@ const RepoList = observer(() => {
                         {sortedRepositories.map((repo: Repository) => (
                             <tr key={repo.id} className="hover:bg-gray-100">
                                 <td className="border border-gray-300 px-4 py-4">{repo.id}</td>
-
                                 <td className="border border-gray-300 px-4 py-4">{repo.name}</td>
                                 <td className="border border-gray-300 px-4 py-4">{repo.description || 'Нет описания'}</td>
                                 <td className="border border-gray-300 px-4 py-4 flex gap-2 items-center">
-                                    <button
-                                        onClick={() => handleEditClick(repo)}
-                                        className="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600 mr-2"
-                                    >
+                                    <button onClick={() => handleEditClick(repo)}
+                                            className="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600 mr-2">
                                         Редактировать
                                     </button>
-                                    <button
-                                        onClick={() => handleDelete(repo.id)}
-                                        className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
-                                    >
+                                    <button onClick={() => handleDelete(repo.id)}
+                                            className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600">
                                         Удалить
                                     </button>
-                                    <a
-                                        href={repo.html_url}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="bg-blue-500 rounded px-3 py-1 text-white hover:underline ml-2"
-                                    >
+                                    <a href={repo.html_url} target="_blank" rel="noopener noreferrer"
+                                       className="bg-blue-500 rounded px-3 py-1 text-white hover:underline ml-2">
                                         Перейти
                                     </a>
                                 </td>
@@ -154,6 +145,49 @@ const RepoList = observer(() => {
                         ))}
                         </tbody>
                     </table>
+
+                    {/* Мобильная версия */}
+                    <div className="md:hidden">
+                        <div className="border border-gray-300 mb-4 p-4 rounded">
+                            <div className="sticky top-0 bg-gray-200 flex">
+                                <div onClick={() => handleSort('id')}
+                                     className="border border-gray-300 px-4 py-2 cursor-pointer flex-1 text-center">
+                                    ID {sortField === 'id' ? (sortOrder === 'asc' ? '↑' : '↓') : '→'}
+                                </div>
+                                <div onClick={() => handleSort('name')}
+                                     className="border border-gray-300 px-4 py-2 cursor-pointer flex-1 text-center">
+                                    Название {sortField === 'name' ? (sortOrder === 'asc' ? '↑' : '↓') : '→'}
+                                </div>
+                                <div onClick={() => handleSort('description')}
+                                     className="border border-gray-300 px-4 py-2 cursor-pointer flex-1 text-center">
+                                    Описание {sortField === 'description' ? (sortOrder === 'asc' ? '↑' : '↓') : '→'}
+                                </div>
+                                <div className="border border-gray-300 px-4 py-2 flex-1 text-center">Действия</div>
+                            </div>
+                        </div>
+
+                        {sortedRepositories.map((repo: Repository) => (
+                            <div key={repo.id} className="border border-gray-300 mb-4 p-4 rounded">
+                                <h2 className="font-bold">ID: {repo.id}</h2>
+                                <p className="font-semibold">Название: {repo.name}</p>
+                                <p>Описание: {repo.description || 'Нет описания'}</p>
+                                <div className="flex gap-2 mt-2">
+                                    <button onClick={() => handleEditClick(repo)}
+                                            className="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600">
+                                        Редактировать
+                                    </button>
+                                    <button onClick={() => handleDelete(repo.id)}
+                                            className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600">
+                                        Удалить
+                                    </button>
+                                    <a href={repo.html_url} target="_blank" rel="noopener noreferrer"
+                                       className="bg-blue-500 rounded px-3 py-1 text-white hover:underline">
+                                        Перейти
+                                    </a>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
                     {repoStore.loading && (
                         <div role="alert" className="pt-2 flex justify-center items-center">
                             <div
